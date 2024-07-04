@@ -23,14 +23,14 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("${DOCKER_IMAGE}").run('-p 8080:8080')
+                    sh. "docker run -d --name test -p 8080:8080 ${DOCKER_IMAGE} "
                 }
             }
             post {
                 always {
                     script {
-                        docker.container("${DOCKER_IMAGE}").stop()
-                        docker.container("${DOCKER_IMAGE}").remove(force: true)
+                        sh. "docker stop test"
+                        sh. "docker rm test"
                     }
                 }
             }
@@ -39,10 +39,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Stop the existing container if running
-                    sh 'docker stop flask-change-app || true'
-                    // Remove the existing container if exists
-                    sh 'docker rm flask-change-app || true'
                     // Run the new container with port mapping
                     sh 'docker run -d -p 8080:8080 --name flask-change-app ${DOCKER_IMAGE}'
                 }
