@@ -23,14 +23,14 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh. "docker run -d --name test -p 8080:8080 ${DOCKER_IMAGE} "
+                    sh. "docker run -d --name ${DOCKER_IMAGE} -p 8080:8080 ${DOCKER_IMAGE} "
                 }
             }
             post {
                 always {
                     script {
-                        sh. "docker stop test"
-                        sh. "docker rm test"
+                        sh. "docker stop ${DOCKER_IMAGE}"
+                        sh. "docker rm ${DOCKER_IMAGE}"
                     }
                 }
             }
