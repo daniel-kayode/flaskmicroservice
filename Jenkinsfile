@@ -43,7 +43,12 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Add deployment steps if needed
+                // Stop the existing container if running
+                    sh 'docker stop flask-change-app || true'
+                    // Remove the existing container if exists
+                    sh 'docker rm flask-change-app || true'
+                    // Run the new container with port mapping
+                    sh 'docker run -d -p 8080:8080 --name flask-change-app ${DOCKER_IMAGE}'
             }
         }
     }
