@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'flask-change-app'
-        DOCKERHUB_REPO = 'kcaher/flaskmicroservice'
+        //DOCKERHUB_REPO = ''
 //        DOCKERHUB_CREDENTIALS_ID = 
     }
 
@@ -45,7 +45,7 @@ pipeline {
                 script {
                     //Push to my dockerhub 
                     //sh "docker login"
-                    sh "docker tag ${DOCKER_IMAGE} DOCKERHUB_REPO}"
+                    sh "docker tag ${DOCKER_IMAGE} kcaher/flaskmicroservice}"
                     sh "docker push kcaher/${DOCKER_IMAGE}"
                 }
             }
