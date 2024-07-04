@@ -30,8 +30,8 @@ pipeline {
                 always {
                     script {
                         sleep 30
-                        sh "docker stop ${DOCKER_IMAGE}"
-                        sh "docker rm ${DOCKER_IMAGE}"
+                        sh "docker stop ${DOCKER_IMAGE}_cont"
+                        sh "docker rm ${DOCKER_IMAGE}_cont"
                     }
                 }
             }
