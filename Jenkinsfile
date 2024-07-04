@@ -42,7 +42,8 @@ pipeline {
             steps {
                 script {
                     //Push to my dockerhub 
-                    sh "docker tag ${DOCKER_IMAGE} kcaher/flaskmicroservice"
+                    sh "docker tag ${DOCKER_IMAGE} kcaher/${DOCKER_IMAGE}"
+                    sh "docker push kcaher/${DOCKER_IMAGE}"
                 }
             }
         }
