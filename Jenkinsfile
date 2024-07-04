@@ -35,7 +35,18 @@ pipeline {
                     }
                 }
             }
+            
         }
+
+        stage('Push to dockerhub') {
+            steps {
+                script {
+                    //Push to my dockerhub 
+                    sh "docker tag ${DOCKER_IMAGE} kcaher/flaskmicroservice"
+                }
+            }
+        }
+
     }
 
     post {
