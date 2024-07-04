@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Run the new container with port mapping
-                    sh 'docker run -d -p 8080:8080 --name flask-change-app ${DOCKER_IMAGE}'
+                    sh. "docker run -d -p 8080:8080 --name flask-change-app ${DOCKER_IMAGE}"
                 }
             }
         }
