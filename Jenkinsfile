@@ -23,12 +23,13 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh. "docker run -d --name ${DOCKER_IMAGE} -p 8080:8080 ${DOCKER_IMAGE} "
+                    sh. "docker run -d --name ${DOCKER_IMAGE}_cont -p 8080:8080 ${DOCKER_IMAGE} "
                 }
             }
             post {
                 always {
                     script {
+                        sleep 30
                         sh. "docker stop ${DOCKER_IMAGE}"
                         sh. "docker rm ${DOCKER_IMAGE}"
                     }
@@ -40,7 +41,7 @@ pipeline {
             steps {
                 script {
                     // Run the new container with port mapping
-                    sh. "docker run -d -p 8080:8080 --name flask-change-app ${DOCKER_IMAGE}"
+                    sh. "docker run -d -p 8089:8080 --name flask-change-app ${DOCKER_IMAGE}"
                 }
             }
         }
