@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     //Push to my dockerhub 
-                    sh "docker login"
+                    //sh "docker login"
                     sh "docker tag ${DOCKER_IMAGE} DOCKERHUB_REPO}"
                     sh "docker push kcaher/${DOCKER_IMAGE}"
                 }
