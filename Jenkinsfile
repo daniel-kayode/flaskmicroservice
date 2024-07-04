@@ -3,8 +3,9 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'flask-change-app'
-        //DOCKERHUB_REPO = ''
-//        DOCKERHUB_CREDENTIALS_ID = 
+        DOCKER_REPO = 'kcaher/flaskmicroservice'
+        DOCKER_CREDENTIALS_ID = '7c665306-9cf4-4180-8a57-ae82e5466a45' // Update with your Docker Hub credentials ID in Jenkins
+    }
     }
 
     stages {
@@ -45,8 +46,10 @@ pipeline {
                 script {
                     //Push to my dockerhub 
                     //sh "docker login"
-                    sh "docker tag ${DOCKER_IMAGE} kcaher/flaskmicroservice}"
-                    sh "docker push kcaher/${DOCKER_IMAGE}"
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'kcaher', passwordVariable: 'DOCKER_PASS')]) {
+                        sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+                        sh "docker tag ${DOCKER_IMAGE} kcaher/flaskmicroservice}"
+                        sh "docker push kcaher/${DOCKER_IMAGE}"
                 }
             }
         }
